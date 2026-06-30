@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../i18n/strings.g.dart';
+import '../models/connection_status.dart';
 import '../providers/debug_log_provider.dart';
 import '../providers/oauth_provider.dart';
 import '../providers/smtp_provider.dart';
@@ -39,7 +40,7 @@ class DebugPanel extends ConsumerWidget {
             logText: logText,
             onClear: () => ref.read(debugLogProvider.notifier).clear(),
             onClose: () =>
-                ref.read(debugPanelVisibleProvider.notifier).state = false,
+                ref.read(debugPanelVisibleProvider.notifier).set(false),
           ),
           const Divider(height: 1, color: AppTheme.cardBorder),
           Expanded(child: LogListView(entries: entries)),
@@ -50,7 +51,7 @@ class DebugPanel extends ConsumerWidget {
 }
 
 class _PanelHeader extends StatelessWidget {
-  final dynamic status;
+  final ConnectionStatus status;
   final bool hasEntries;
   final String logText;
   final VoidCallback onClear;

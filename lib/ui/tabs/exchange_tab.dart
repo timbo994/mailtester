@@ -38,20 +38,20 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
   }
 
   Future<void> _runOauthFlow() async {
-    ref.read(oauthStatusProvider.notifier).state = ConnectionStatus.connecting;
-    ref.read(debugPanelVisibleProvider.notifier).state = true;
+    ref.read(oauthStatusProvider.notifier).set(ConnectionStatus.connecting);
+    ref.read(debugPanelVisibleProvider.notifier).set(true);
     ref.read(debugLogProvider.notifier).clear();
-    ref.read(oauthTokenProvider.notifier).state = null;
+    ref.read(oauthTokenProvider.notifier).set(null);
 
     final cfg = ref.read(oauthConfigProvider);
     final service = OAuthService(onLog: ref.read(debugLogProvider.notifier).add);
 
     try {
       final token = await service.requestToken(cfg);
-      ref.read(oauthTokenProvider.notifier).state = token;
-      ref.read(oauthStatusProvider.notifier).state = ConnectionStatus.connected;
+      ref.read(oauthTokenProvider.notifier).set(token);
+      ref.read(oauthStatusProvider.notifier).set(ConnectionStatus.connected);
     } catch (_) {
-      ref.read(oauthStatusProvider.notifier).state = ConnectionStatus.error;
+      ref.read(oauthStatusProvider.notifier).set(ConnectionStatus.error);
     }
   }
 
@@ -59,17 +59,17 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
     final token = ref.read(oauthTokenProvider);
     if (token == null) return;
 
-    ref.read(oauthStatusProvider.notifier).state = ConnectionStatus.connecting;
-    ref.read(debugPanelVisibleProvider.notifier).state = true;
+    ref.read(oauthStatusProvider.notifier).set(ConnectionStatus.connecting);
+    ref.read(debugPanelVisibleProvider.notifier).set(true);
 
     final cfg = ref.read(oauthConfigProvider);
     final service = OAuthService(onLog: ref.read(debugLogProvider.notifier).add);
 
     try {
       await service.testEws(token, cfg.mailbox);
-      ref.read(oauthStatusProvider.notifier).state = ConnectionStatus.connected;
+      ref.read(oauthStatusProvider.notifier).set(ConnectionStatus.connected);
     } catch (_) {
-      ref.read(oauthStatusProvider.notifier).state = ConnectionStatus.error;
+      ref.read(oauthStatusProvider.notifier).set(ConnectionStatus.error);
     }
   }
 
@@ -249,7 +249,7 @@ class _SecretField extends StatelessWidget {
   }
 }
 
-class _AutoField extends StatelessWidget {
+class _AutoField extends StatefulWidget {
   final String label;
   final String value;
   final bool loading;
@@ -261,18 +261,43 @@ class _AutoField extends StatelessWidget {
   });
 
   @override
+  State<_AutoField> createState() => _AutoFieldState();
+}
+
+class _AutoFieldState extends State<_AutoField> {
+  late final TextEditingController _ctrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(text: widget.value);
+  }
+
+  @override
+  void didUpdateWidget(_AutoField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.value != oldWidget.value) _ctrl.text = widget.value;
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         TextField(
-          controller: TextEditingController(text: value),
+          controller: _ctrl,
           readOnly: true,
           style: const TextStyle(fontSize: 12, color: AppTheme.mutedText),
           decoration: InputDecoration(
-            labelText: label,
+            labelText: widget.label,
             isDense: true,
             contentPadding: const EdgeInsets.fromLTRB(14, 12, 70, 12),
-            hintText: loading
+            hintText: widget.loading
                 ? t.exchange.discoveryRunning
                 : t.exchange.discoveryPlaceholder,
             hintStyle: const TextStyle(fontSize: 12, color: AppTheme.deepHint),
@@ -281,7 +306,7 @@ class _AutoField extends StatelessWidget {
         Positioned(
           right: 10,
           top: 10,
-          child: loading
+          child: widget.loading
               ? const SizedBox(
                   width: 14,
                   height: 14,

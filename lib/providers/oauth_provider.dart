@@ -8,15 +8,18 @@ import '../models/oauth_config.dart';
 import '../services/discovery_service.dart';
 import 'debug_log_provider.dart';
 
-class OAuthConfigNotifier extends StateNotifier<OAuthConfig> {
-  final Ref _ref;
+class OAuthConfigNotifier extends Notifier<OAuthConfig> {
   Timer? _debounce;
 
   static final _uuidRegex = RegExp(
     r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
   );
 
-  OAuthConfigNotifier(this._ref) : super(const OAuthConfig());
+  @override
+  OAuthConfig build() {
+    ref.onDispose(() => _debounce?.cancel());
+    return const OAuthConfig();
+  }
 
   void setTenantId(String v) {
     state = state.copyWith(
@@ -38,7 +41,7 @@ class OAuthConfigNotifier extends StateNotifier<OAuthConfig> {
   void setMailbox(String v) => state = state.copyWith(mailbox: v);
 
   Future<void> _discover(String tenantId) async {
-    final addLog = _ref.read(debugLogProvider.notifier).add;
+    final addLog = ref.read(debugLogProvider.notifier).add;
     addLog(LogEntry(
       timestamp: DateTime.now(),
       level: LogLevel.info,
@@ -59,20 +62,32 @@ class OAuthConfigNotifier extends StateNotifier<OAuthConfig> {
       ));
     }
   }
-
-  @override
-  void dispose() {
-    _debounce?.cancel();
-    super.dispose();
-  }
 }
 
 final oauthConfigProvider =
-    StateNotifierProvider<OAuthConfigNotifier, OAuthConfig>(
-  (ref) => OAuthConfigNotifier(ref),
+    NotifierProvider<OAuthConfigNotifier, OAuthConfig>(
+  OAuthConfigNotifier.new,
 );
 
-final oauthStatusProvider =
-    StateProvider<ConnectionStatus>((ref) => ConnectionStatus.idle);
+class OAuthStatusNotifier extends Notifier<ConnectionStatus> {
+  @override
+  ConnectionStatus build() => ConnectionStatus.idle;
 
-final oauthTokenProvider = StateProvider<String?>((ref) => null);
+  void set(ConnectionStatus status) => state = status;
+}
+
+final oauthStatusProvider =
+    NotifierProvider<OAuthStatusNotifier, ConnectionStatus>(
+  OAuthStatusNotifier.new,
+);
+
+class OAuthTokenNotifier extends Notifier<String?> {
+  @override
+  String? build() => null;
+
+  void set(String? token) => state = token;
+}
+
+final oauthTokenProvider = NotifierProvider<OAuthTokenNotifier, String?>(
+  OAuthTokenNotifier.new,
+);

@@ -62,8 +62,8 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
       );
 
   Future<void> _run({required bool sendMail}) async {
-    ref.read(smtpStatusProvider.notifier).state = ConnectionStatus.connecting;
-    ref.read(debugPanelVisibleProvider.notifier).state = true;
+    ref.read(smtpStatusProvider.notifier).set(ConnectionStatus.connecting);
+    ref.read(debugPanelVisibleProvider.notifier).set(true);
     ref.read(debugLogProvider.notifier).clear();
 
     final service = SmtpService(
@@ -76,9 +76,9 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
       } else {
         await service.testConnection(_buildConfig());
       }
-      ref.read(smtpStatusProvider.notifier).state = ConnectionStatus.connected;
+      ref.read(smtpStatusProvider.notifier).set(ConnectionStatus.connected);
     } catch (_) {
-      ref.read(smtpStatusProvider.notifier).state = ConnectionStatus.error;
+      ref.read(smtpStatusProvider.notifier).set(ConnectionStatus.error);
     }
   }
 

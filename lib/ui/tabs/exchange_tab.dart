@@ -5,6 +5,7 @@ import '../../models/connection_status.dart';
 import '../../providers/debug_log_provider.dart';
 import '../../providers/oauth_provider.dart';
 import '../../services/oauth_service.dart';
+import '../app_theme.dart';
 import '../widgets/status_chip.dart';
 
 class ExchangeTab extends ConsumerStatefulWidget {
@@ -174,7 +175,7 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
             const SizedBox(height: 8),
             const Text(
               'EWS-Test erst nach erfolgreichem OAuth-Flow verfügbar.',
-              style: TextStyle(fontSize: 11, color: Color(0xFF7070A0)),
+              style: TextStyle(fontSize: 11, color: AppTheme.mutedText),
             ),
           ],
         ],
@@ -199,7 +200,7 @@ class _Section extends StatelessWidget {
           style: const TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF7070A0),
+            color: AppTheme.mutedText,
             letterSpacing: 0.8,
           ),
         ),
@@ -207,9 +208,9 @@ class _Section extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: const Color(0xFF252637),
+            color: AppTheme.surface,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFF2D2E45)),
+            border: Border.all(color: AppTheme.cardBorder),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,7 +244,7 @@ class _Field extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
-        hintStyle: const TextStyle(fontSize: 12, color: Color(0xFF555570)),
+        hintStyle: const TextStyle(fontSize: 12, color: AppTheme.hintText),
         isDense: true,
       ),
     );
@@ -303,13 +304,13 @@ class _AutoField extends StatelessWidget {
         TextField(
           controller: TextEditingController(text: value),
           readOnly: true,
-          style: const TextStyle(fontSize: 12, color: Color(0xFF7070A0)),
+          style: const TextStyle(fontSize: 12, color: AppTheme.mutedText),
           decoration: InputDecoration(
             labelText: label,
             isDense: true,
             contentPadding: const EdgeInsets.fromLTRB(14, 12, 70, 12),
             hintText: loading ? 'Discovery läuft…' : 'Wird nach Tenant-ID befüllt',
-            hintStyle: const TextStyle(fontSize: 12, color: Color(0xFF444460)),
+            hintStyle: const TextStyle(fontSize: 12, color: AppTheme.deepHint),
           ),
         ),
         Positioned(
@@ -321,23 +322,22 @@ class _AutoField extends StatelessWidget {
                   height: 14,
                   child: CircularProgressIndicator(
                     strokeWidth: 1.5,
-                    color: Color(0xFF7C6CFF),
+                    color: AppTheme.primary,
                   ),
                 )
               : Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF7C6CFF).withAlpha(40),
-                    border: Border.all(
-                        color: const Color(0xFF7C6CFF).withAlpha(100)),
+                    color: AppTheme.primary.withAlpha(40),
+                    border: Border.all(color: AppTheme.primary.withAlpha(100)),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: const Text(
                     'AUTO',
                     style: TextStyle(
                       fontSize: 10,
-                      color: Color(0xFF9090E0),
+                      color: AppTheme.autoBadgeText,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

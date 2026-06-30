@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/connection_status.dart';
+import '../app_theme.dart';
 import '../../models/smtp_config.dart';
 import '../../providers/debug_log_provider.dart';
 import '../../providers/smtp_provider.dart';
@@ -124,7 +125,7 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
                 children: [
                   const Text(
                     'TLS-Modus',
-                    style: TextStyle(fontSize: 12, color: Color(0xFF9E9E9E)),
+                    style: TextStyle(fontSize: 12, color: AppTheme.subtleText),
                   ),
                   const SizedBox(width: 16),
                   TlsPillSelector(
@@ -215,7 +216,7 @@ class _Section extends StatelessWidget {
           style: const TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF7070A0),
+            color: AppTheme.mutedText,
             letterSpacing: 0.8,
           ),
         ),
@@ -223,9 +224,9 @@ class _Section extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: const Color(0xFF252637),
+            color: AppTheme.surface,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFF2D2E45)),
+            border: Border.all(color: AppTheme.cardBorder),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

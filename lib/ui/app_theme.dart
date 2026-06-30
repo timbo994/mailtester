@@ -7,6 +7,13 @@ abstract final class AppTheme {
   static const text = Color(0xFFE0E0F0);
   static const dimText = Color(0xFF9E9EBE);
   static const border = Color(0xFF3D3E58);
+  static const cardBorder = Color(0xFF2D2E45);
+
+  static const subtleText = Color(0xFF9E9E9E);
+  static const mutedText = Color(0xFF7070A0);
+  static const hintText = Color(0xFF555570);
+  static const deepHint = Color(0xFF444460);
+  static const autoBadgeText = Color(0xFF9090E0);
 
   static const statusIdle = Color(0xFF9E9E9E);
   static const statusConnecting = Color(0xFFFF9800);

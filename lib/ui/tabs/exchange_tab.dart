@@ -6,6 +6,7 @@ import '../../providers/debug_log_provider.dart';
 import '../../providers/oauth_provider.dart';
 import '../../services/oauth_service.dart';
 import '../app_theme.dart';
+import '../widgets/section_card.dart';
 import '../widgets/status_chip.dart';
 
 class ExchangeTab extends ConsumerStatefulWidget {
@@ -84,7 +85,7 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _Section(
+          SectionCard(
             title: 'Azure-Konfiguration',
             children: [
               _Field(
@@ -120,7 +121,7 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
             ],
           ),
           const SizedBox(height: 16),
-          _Section(
+          SectionCard(
             title: 'Auto-Discovery',
             children: [
               _AutoField(
@@ -143,7 +144,7 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
             ],
           ),
           const SizedBox(height: 16),
-          _Section(
+          SectionCard(
             title: 'Postfach',
             children: [
               _Field(
@@ -180,39 +181,6 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
           ],
         ],
       ),
-    );
-  }
-}
-
-class _Section extends StatelessWidget {
-  final String title;
-  final List<Widget> children;
-
-  const _Section({required this.title, required this.children});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title.toUpperCase(),
-          style: Theme.of(context).textTheme.labelSmall,
-        ),
-        const SizedBox(height: 10),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: AppTheme.surface,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppTheme.cardBorder),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: children,
-          ),
-        ),
-      ],
     );
   }
 }

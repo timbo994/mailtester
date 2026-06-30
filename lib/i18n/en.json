@@ -1,0 +1,58 @@
+{
+  "appTitle": "SMTP & Exchange OAuth Tester",
+  "connectionStatus": {
+    "idle": "Not connected",
+    "connecting": "Connecting…",
+    "connected": "Connected",
+    "error": "Error"
+  },
+  "tlsMode": {
+    "none": "None",
+    "starttls": "STARTTLS",
+    "sslTls": "SSL/TLS"
+  },
+  "smtp": {
+    "sectionConnection": "Connection",
+    "host": "SMTP Host",
+    "port": "Port",
+    "timeout": "Timeout (s)",
+    "tlsModeLabel": "TLS Mode",
+    "sectionAuth": "Authentication",
+    "username": "Username",
+    "password": "Password",
+    "sectionTestMail": "Test Email",
+    "from": "From",
+    "to": "To",
+    "subject": "Subject",
+    "body": "Message Body",
+    "defaultSubject": "SMTP Connection Test",
+    "defaultBody": "This is an automatically generated test email.",
+    "btnTestConnection": "Test Connection",
+    "btnSendTestMail": "Send Test Email"
+  },
+  "exchange": {
+    "sectionAzure": "Azure Configuration",
+    "tenantId": "Tenant ID (UUID)",
+    "tenantIdHint": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "clientId": "Client ID",
+    "clientSecret": "Client Secret",
+    "sectionDiscovery": "Auto-Discovery",
+    "tokenEndpoint": "Token Endpoint",
+    "authEndpoint": "Authorization Endpoint",
+    "scope": "Scope",
+    "sectionMailbox": "Mailbox",
+    "mailbox": "Exchange Mailbox (Email)",
+    "ewsHint": "EWS test only available after a successful OAuth flow.",
+    "discoveryRunning": "Discovery running…",
+    "discoveryPlaceholder": "Will be filled after Tenant ID is entered",
+    "btnTestOAuth": "Test OAuth Flow",
+    "btnTestEws": "Check EWS Connection"
+  },
+  "debug": {
+    "title": "Debug Output",
+    "tooltipCopy": "Copy log",
+    "tooltipClear": "Clear log",
+    "tooltipClose": "Close panel",
+    "emptyHint": "No output yet. Start a test."
+  }
+}

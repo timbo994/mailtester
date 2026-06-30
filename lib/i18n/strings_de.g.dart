@@ -5,20 +5,16 @@
 // ignore_for_file: type=lint, unused_import
 // dart format off
 
-part of 'strings.g.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:slang/generated.dart';
+import 'strings.g.dart';
 
 // Path: <root>
-typedef TranslationsDe = Translations; // ignore: unused_element
-class Translations with BaseTranslations<AppLocale, Translations> {
-	/// Returns the current translations of the given [context].
-	///
-	/// Usage:
-	/// final t = Translations.of(context);
-	static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
-
+class TranslationsDe with BaseTranslations<AppLocale, Translations> implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
+	TranslationsDe({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
 		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.de,
@@ -33,202 +29,110 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key);
 
-	late final Translations _root = this; // ignore: unused_field
+	late final TranslationsDe _root = this; // ignore: unused_field
 
-	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
+	@override 
+	TranslationsDe $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsDe(meta: meta ?? this.$meta);
 
 	// Translations
-
-	/// de: 'SMTP & Exchange OAuth Tester'
-	String get appTitle => 'SMTP & Exchange OAuth Tester';
-
-	late final Translations$connectionStatus$de connectionStatus = Translations$connectionStatus$de._(_root);
-	late final Translations$tlsMode$de tlsMode = Translations$tlsMode$de._(_root);
-	late final Translations$smtp$de smtp = Translations$smtp$de._(_root);
-	late final Translations$exchange$de exchange = Translations$exchange$de._(_root);
-	late final Translations$debug$de debug = Translations$debug$de._(_root);
+	@override String get appTitle => 'SMTP & Exchange OAuth Tester';
+	@override late final _Translations$connectionStatus$de connectionStatus = _Translations$connectionStatus$de._(_root);
+	@override late final _Translations$tlsMode$de tlsMode = _Translations$tlsMode$de._(_root);
+	@override late final _Translations$smtp$de smtp = _Translations$smtp$de._(_root);
+	@override late final _Translations$exchange$de exchange = _Translations$exchange$de._(_root);
+	@override late final _Translations$debug$de debug = _Translations$debug$de._(_root);
 }
 
 // Path: connectionStatus
-class Translations$connectionStatus$de {
-	Translations$connectionStatus$de._(this._root);
+class _Translations$connectionStatus$de implements Translations$connectionStatus$en {
+	_Translations$connectionStatus$de._(this._root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-
-	/// de: 'Nicht verbunden'
-	String get idle => 'Nicht verbunden';
-
-	/// de: 'Verbinde…'
-	String get connecting => 'Verbinde…';
-
-	/// de: 'Verbunden'
-	String get connected => 'Verbunden';
-
-	/// de: 'Fehler'
-	String get error => 'Fehler';
+	@override String get idle => 'Nicht verbunden';
+	@override String get connecting => 'Verbinde…';
+	@override String get connected => 'Verbunden';
+	@override String get error => 'Fehler';
 }
 
 // Path: tlsMode
-class Translations$tlsMode$de {
-	Translations$tlsMode$de._(this._root);
+class _Translations$tlsMode$de implements Translations$tlsMode$en {
+	_Translations$tlsMode$de._(this._root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-
-	/// de: 'Keine'
-	String get none => 'Keine';
-
-	/// de: 'STARTTLS'
-	String get starttls => 'STARTTLS';
-
-	/// de: 'SSL/TLS'
-	String get sslTls => 'SSL/TLS';
+	@override String get none => 'Keine';
+	@override String get starttls => 'STARTTLS';
+	@override String get sslTls => 'SSL/TLS';
 }
 
 // Path: smtp
-class Translations$smtp$de {
-	Translations$smtp$de._(this._root);
+class _Translations$smtp$de implements Translations$smtp$en {
+	_Translations$smtp$de._(this._root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-
-	/// de: 'Verbindung'
-	String get sectionConnection => 'Verbindung';
-
-	/// de: 'SMTP-Host'
-	String get host => 'SMTP-Host';
-
-	/// de: 'Port'
-	String get port => 'Port';
-
-	/// de: 'Timeout (s)'
-	String get timeout => 'Timeout (s)';
-
-	/// de: 'TLS-Modus'
-	String get tlsModeLabel => 'TLS-Modus';
-
-	/// de: 'Authentifizierung'
-	String get sectionAuth => 'Authentifizierung';
-
-	/// de: 'Benutzername'
-	String get username => 'Benutzername';
-
-	/// de: 'Passwort'
-	String get password => 'Passwort';
-
-	/// de: 'Test-E-Mail'
-	String get sectionTestMail => 'Test-E-Mail';
-
-	/// de: 'Von'
-	String get from => 'Von';
-
-	/// de: 'An'
-	String get to => 'An';
-
-	/// de: 'Betreff'
-	String get subject => 'Betreff';
-
-	/// de: 'Nachrichtentext'
-	String get body => 'Nachrichtentext';
-
-	/// de: 'SMTP Verbindungstest'
-	String get defaultSubject => 'SMTP Verbindungstest';
-
-	/// de: 'Dies ist eine automatisch generierte Test-E-Mail.'
-	String get defaultBody => 'Dies ist eine automatisch generierte Test-E-Mail.';
-
-	/// de: 'Verbindung testen'
-	String get btnTestConnection => 'Verbindung testen';
-
-	/// de: 'Test-Mail senden'
-	String get btnSendTestMail => 'Test-Mail senden';
+	@override String get sectionConnection => 'Verbindung';
+	@override String get host => 'SMTP-Host';
+	@override String get port => 'Port';
+	@override String get timeout => 'Timeout (s)';
+	@override String get tlsModeLabel => 'TLS-Modus';
+	@override String get sectionAuth => 'Authentifizierung';
+	@override String get username => 'Benutzername';
+	@override String get password => 'Passwort';
+	@override String get sectionTestMail => 'Test-E-Mail';
+	@override String get from => 'Von';
+	@override String get to => 'An';
+	@override String get subject => 'Betreff';
+	@override String get body => 'Nachrichtentext';
+	@override String get defaultSubject => 'SMTP Verbindungstest';
+	@override String get defaultBody => 'Dies ist eine automatisch generierte Test-E-Mail.';
+	@override String get btnTestConnection => 'Verbindung testen';
+	@override String get btnSendTestMail => 'Test-Mail senden';
 }
 
 // Path: exchange
-class Translations$exchange$de {
-	Translations$exchange$de._(this._root);
+class _Translations$exchange$de implements Translations$exchange$en {
+	_Translations$exchange$de._(this._root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-
-	/// de: 'Azure-Konfiguration'
-	String get sectionAzure => 'Azure-Konfiguration';
-
-	/// de: 'Tenant-ID (UUID)'
-	String get tenantId => 'Tenant-ID (UUID)';
-
-	/// de: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-	String get tenantIdHint => 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
-
-	/// de: 'Client-ID'
-	String get clientId => 'Client-ID';
-
-	/// de: 'Client-Secret'
-	String get clientSecret => 'Client-Secret';
-
-	/// de: 'Auto-Discovery'
-	String get sectionDiscovery => 'Auto-Discovery';
-
-	/// de: 'Token-Endpoint'
-	String get tokenEndpoint => 'Token-Endpoint';
-
-	/// de: 'Authorization-Endpoint'
-	String get authEndpoint => 'Authorization-Endpoint';
-
-	/// de: 'Scope'
-	String get scope => 'Scope';
-
-	/// de: 'Postfach'
-	String get sectionMailbox => 'Postfach';
-
-	/// de: 'Exchange-Mailbox (E-Mail)'
-	String get mailbox => 'Exchange-Mailbox (E-Mail)';
-
-	/// de: 'EWS-Test erst nach erfolgreichem OAuth-Flow verfügbar.'
-	String get ewsHint => 'EWS-Test erst nach erfolgreichem OAuth-Flow verfügbar.';
-
-	/// de: 'Discovery läuft…'
-	String get discoveryRunning => 'Discovery läuft…';
-
-	/// de: 'Wird nach Tenant-ID befüllt'
-	String get discoveryPlaceholder => 'Wird nach Tenant-ID befüllt';
-
-	/// de: 'OAuth-Flow testen'
-	String get btnTestOAuth => 'OAuth-Flow testen';
-
-	/// de: 'EWS-Verbindung prüfen'
-	String get btnTestEws => 'EWS-Verbindung prüfen';
+	@override String get sectionAzure => 'Azure-Konfiguration';
+	@override String get tenantId => 'Tenant-ID (UUID)';
+	@override String get tenantIdHint => 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
+	@override String get clientId => 'Client-ID';
+	@override String get clientSecret => 'Client-Secret';
+	@override String get sectionDiscovery => 'Auto-Discovery';
+	@override String get tokenEndpoint => 'Token-Endpoint';
+	@override String get authEndpoint => 'Authorization-Endpoint';
+	@override String get scope => 'Scope';
+	@override String get sectionMailbox => 'Postfach';
+	@override String get mailbox => 'Exchange-Mailbox (E-Mail)';
+	@override String get ewsHint => 'EWS-Test erst nach erfolgreichem OAuth-Flow verfügbar.';
+	@override String get discoveryRunning => 'Discovery läuft…';
+	@override String get discoveryPlaceholder => 'Wird nach Tenant-ID befüllt';
+	@override String get btnTestOAuth => 'OAuth-Flow testen';
+	@override String get btnTestEws => 'EWS-Verbindung prüfen';
 }
 
 // Path: debug
-class Translations$debug$de {
-	Translations$debug$de._(this._root);
+class _Translations$debug$de implements Translations$debug$en {
+	_Translations$debug$de._(this._root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-
-	/// de: 'Debug-Ausgabe'
-	String get title => 'Debug-Ausgabe';
-
-	/// de: 'Log kopieren'
-	String get tooltipCopy => 'Log kopieren';
-
-	/// de: 'Log leeren'
-	String get tooltipClear => 'Log leeren';
-
-	/// de: 'Panel schließen'
-	String get tooltipClose => 'Panel schließen';
-
-	/// de: 'Noch keine Ausgabe. Starte einen Test.'
-	String get emptyHint => 'Noch keine Ausgabe. Starte einen Test.';
+	@override String get title => 'Debug-Ausgabe';
+	@override String get tooltipCopy => 'Log kopieren';
+	@override String get tooltipClear => 'Log leeren';
+	@override String get tooltipClose => 'Panel schließen';
+	@override String get emptyHint => 'Noch keine Ausgabe. Starte einen Test.';
 }
 
 /// The flat map containing all translations for locale <de>.
@@ -236,7 +140,7 @@ class Translations$debug$de {
 ///
 /// The Dart AOT compiler has issues with very large switch statements,
 /// so the map is split into smaller functions (512 entries each).
-extension on Translations {
+extension on TranslationsDe {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
 			'appTitle' => 'SMTP & Exchange OAuth Tester',

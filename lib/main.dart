@@ -8,7 +8,7 @@ import 'ui/main_window.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  LocaleSettings.setLocale(AppLocale.de);
+  LocaleSettings.useDeviceLocale();
   await windowManager.ensureInitialized();
 
   const windowOptions = WindowOptions(

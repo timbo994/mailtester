@@ -8,6 +8,11 @@ abstract final class AppTheme {
   static const dimText = Color(0xFF9E9EBE);
   static const border = Color(0xFF3D3E58);
 
+  static const statusIdle = Color(0xFF9E9E9E);
+  static const statusConnecting = Color(0xFFFF9800);
+  static const statusConnected = Color(0xFF4CAF50);
+  static const statusError = Color(0xFFF44336);
+
   static ThemeData build() {
     return ThemeData(
       brightness: Brightness.dark,

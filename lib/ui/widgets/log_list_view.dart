@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../i18n/strings.g.dart';
 import '../../models/log_entry.dart';
 import '../app_theme.dart';
+import '../extensions/log_entry_ui.dart';
 
 class LogListView extends StatefulWidget {
   final List<LogEntry> entries;

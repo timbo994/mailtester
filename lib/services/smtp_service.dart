@@ -5,8 +5,6 @@ import 'dart:io';
 import '../models/log_entry.dart';
 import '../models/smtp_config.dart';
 
-typedef LogCallback = void Function(LogEntry);
-
 class SmtpService {
   final LogCallback onLog;
 
@@ -72,10 +70,10 @@ class SmtpService {
     );
   }
 
-  Future<_Resp> _readResp(int t) async {
+  Future<_Resp> _readResp(int timeoutSec) async {
     final lines = <String>[];
     do {
-      lines.add(await _nextLine(t));
+      lines.add(await _nextLine(timeoutSec));
     } while (lines.last.length >= 4 && lines.last[3] == '-');
     final last = lines.last;
     final code = int.tryParse(last.length >= 3 ? last.substring(0, 3) : '') ?? 0;

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 enum LogLevel { success, info, warning, error }
+
+typedef LogCallback = void Function(LogEntry);
 
 class LogEntry {
   final DateTime timestamp;
@@ -12,20 +12,6 @@ class LogEntry {
     required this.level,
     required this.message,
   });
-
-  Color get color => switch (level) {
-        LogLevel.success => const Color(0xFF4CAF50),
-        LogLevel.info => const Color(0xFF9E9E9E),
-        LogLevel.warning => const Color(0xFFFF9800),
-        LogLevel.error => const Color(0xFFF44336),
-      };
-
-  String get prefix => switch (level) {
-        LogLevel.success => '✓',
-        LogLevel.info => ' ',
-        LogLevel.warning => '⚠',
-        LogLevel.error => '✗',
-      };
 
   String get timeString {
     final h = timestamp.hour.toString().padLeft(2, '0');

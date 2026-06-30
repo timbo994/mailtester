@@ -5,8 +5,6 @@ import 'package:http/http.dart' as http;
 import '../models/log_entry.dart';
 import '../models/oauth_config.dart';
 
-typedef LogCallback = void Function(LogEntry);
-
 class OAuthService {
   final LogCallback onLog;
 

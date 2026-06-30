@@ -4,8 +4,6 @@ import 'package:http/http.dart' as http;
 
 import '../models/log_entry.dart';
 
-typedef LogCallback = void Function(LogEntry);
-
 class DiscoveryService {
   static Future<Map<String, String>> discover(
     String tenantId,

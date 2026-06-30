@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/connection_status.dart';
+import '../extensions/connection_status_ui.dart';
 
 class StatusChip extends StatelessWidget {
   final ConnectionStatus status;

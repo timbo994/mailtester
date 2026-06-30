@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/log_entry.dart';
+import '../app_theme.dart';
 
 class LogListView extends StatefulWidget {
   final List<LogEntry> entries;
@@ -42,7 +43,7 @@ class _LogListViewState extends State<LogListView> {
       return const Center(
         child: Text(
           'Noch keine Ausgabe. Starte einen Test.',
-          style: TextStyle(color: Color(0xFF555570), fontSize: 13),
+          style: TextStyle(color: AppTheme.hintText, fontSize: 13),
         ),
       );
     }
@@ -63,7 +64,7 @@ class _LogListViewState extends State<LogListView> {
                 style: const TextStyle(
                   fontFamily: 'monospace',
                   fontSize: 11,
-                  color: Color(0xFF555570),
+                  color: AppTheme.hintText,
                 ),
               ),
               const SizedBox(width: 8),

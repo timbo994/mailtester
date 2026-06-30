@@ -8,12 +8,17 @@ abstract final class AppTheme {
   static const dimText = Color(0xFF9E9EBE);
   static const border = Color(0xFF3D3E58);
   static const cardBorder = Color(0xFF2D2E45);
+  static const disabledBorder = Color(0xFF2A2B40);
 
   static const subtleText = Color(0xFF9E9E9E);
   static const mutedText = Color(0xFF7070A0);
   static const hintText = Color(0xFF555570);
   static const deepHint = Color(0xFF444460);
   static const autoBadgeText = Color(0xFF9090E0);
+
+  static const panelBackground = Color(0xFF141520);
+  static const appBarBackground = Color(0xFF1E1F30);
+  static const panelHeaderText = Color(0xFFB0B0C8);
 
   static const statusIdle = Color(0xFF9E9E9E);
   static const statusConnecting = Color(0xFFFF9800);
@@ -57,7 +62,7 @@ abstract final class AppTheme {
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Color(0xFF2A2B40)),
+          borderSide: const BorderSide(color: disabledBorder),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         isDense: true,
@@ -93,11 +98,18 @@ abstract final class AppTheme {
           side: WidgetStatePropertyAll(BorderSide(color: border.withAlpha(150))),
         ),
       ),
-      dividerTheme: const DividerThemeData(color: Color(0xFF2D2E45)),
+      dividerTheme: const DividerThemeData(color: cardBorder),
       iconTheme: const IconThemeData(color: dimText),
       textTheme: const TextTheme(
+        titleSmall: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: text),
         bodyMedium: TextStyle(color: text, fontSize: 13),
         bodySmall: TextStyle(color: dimText, fontSize: 12),
+        labelSmall: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          color: mutedText,
+          letterSpacing: 0.8,
+        ),
       ),
     );
   }

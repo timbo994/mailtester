@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/debug_log_provider.dart';
 import '../providers/oauth_provider.dart';
 import '../providers/smtp_provider.dart';
+import 'app_theme.dart';
 import 'widgets/log_list_view.dart';
 import 'widgets/status_chip.dart';
 
@@ -26,8 +27,8 @@ class DebugPanel extends ConsumerWidget {
 
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xFF141520),
-        border: Border(left: BorderSide(color: Color(0xFF2D2E45))),
+        color: AppTheme.panelBackground,
+        border: Border(left: BorderSide(color: AppTheme.cardBorder)),
       ),
       child: Column(
         children: [
@@ -39,7 +40,7 @@ class DebugPanel extends ConsumerWidget {
             onClose: () =>
                 ref.read(debugPanelVisibleProvider.notifier).state = false,
           ),
-          const Divider(height: 1, color: Color(0xFF2D2E45)),
+          const Divider(height: 1, color: AppTheme.cardBorder),
           Expanded(child: LogListView(entries: entries)),
         ],
       ),
@@ -73,7 +74,7 @@ class _PanelHeader extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 13,
-              color: Color(0xFFB0B0C8),
+              color: AppTheme.panelHeaderText,
             ),
           ),
           const SizedBox(width: 10),
@@ -124,7 +125,7 @@ class _HeaderButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
         child: Padding(
           padding: const EdgeInsets.all(5),
-          child: Icon(icon, size: 16, color: const Color(0xFF7070A0)),
+          child: Icon(icon, size: 16, color: AppTheme.mutedText),
         ),
       ),
     );

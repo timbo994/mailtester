@@ -213,12 +213,7 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title.toUpperCase(),
-          style: const TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-            color: AppTheme.mutedText,
-            letterSpacing: 0.8,
-          ),
+          style: Theme.of(context).textTheme.labelSmall,
         ),
         const SizedBox(height: 10),
         Container(
@@ -257,7 +252,7 @@ class _Field extends StatelessWidget {
       controller: ctrl,
       keyboardType: keyboardType,
       maxLines: maxLines,
-      style: const TextStyle(fontSize: 13),
+      style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
         labelText: label,
         isDense: true,
@@ -282,7 +277,7 @@ class _PasswordField extends StatelessWidget {
     return TextField(
       controller: ctrl,
       obscureText: obscure,
-      style: const TextStyle(fontSize: 13),
+      style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
         labelText: 'Passwort',
         isDense: true,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/debug_log_provider.dart';
+import 'app_theme.dart';
 import 'debug_panel.dart';
 import 'tabs/exchange_tab.dart';
 import 'tabs/smtp_tab.dart';
@@ -16,7 +17,7 @@ class MainWindow extends ConsumerWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: const Color(0xFF1A1B27),
+        backgroundColor: AppTheme.background,
         body: Row(
           children: [
             Expanded(
@@ -47,21 +48,17 @@ class _AppBar extends StatelessWidget {
     return Container(
       height: 56,
       decoration: const BoxDecoration(
-        color: Color(0xFF1E1F30),
-        border: Border(bottom: BorderSide(color: Color(0xFF2D2E45))),
+        color: AppTheme.appBarBackground,
+        border: Border(bottom: BorderSide(color: AppTheme.cardBorder)),
       ),
       child: Row(
         children: [
           const SizedBox(width: 20),
-          const Icon(Icons.email_outlined, size: 18, color: Color(0xFF7C6CFF)),
+          const Icon(Icons.email_outlined, size: 18, color: AppTheme.primary),
           const SizedBox(width: 10),
-          const Text(
+          Text(
             'SMTP & Exchange OAuth Tester',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFFE0E0F0),
-            ),
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(width: 32),
           const TabBar(

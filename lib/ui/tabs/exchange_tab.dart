@@ -197,12 +197,7 @@ class _Section extends StatelessWidget {
       children: [
         Text(
           title.toUpperCase(),
-          style: const TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-            color: AppTheme.mutedText,
-            letterSpacing: 0.8,
-          ),
+          style: Theme.of(context).textTheme.labelSmall,
         ),
         const SizedBox(height: 10),
         Container(
@@ -239,7 +234,7 @@ class _Field extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: ctrl,
-      style: const TextStyle(fontSize: 13),
+      style: Theme.of(context).textTheme.bodyMedium,
       onChanged: onChanged,
       decoration: InputDecoration(
         labelText: label,
@@ -269,7 +264,7 @@ class _SecretField extends StatelessWidget {
     return TextField(
       controller: ctrl,
       obscureText: obscure,
-      style: const TextStyle(fontSize: 13),
+      style: Theme.of(context).textTheme.bodyMedium,
       onChanged: onChanged,
       decoration: InputDecoration(
         labelText: 'Client-Secret',

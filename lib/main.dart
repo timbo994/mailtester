@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'i18n/strings.g.dart';
 import 'ui/app_theme.dart';
 import 'ui/main_window.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  LocaleSettings.setLocale(AppLocale.de);
   await windowManager.ensureInitialized();
 
   const windowOptions = WindowOptions(
@@ -32,11 +34,13 @@ class _App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SMTP & Exchange OAuth Tester',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.build(),
-      home: const MainWindow(),
+    return TranslationProvider(
+      child: MaterialApp(
+        title: t.appTitle,
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.build(),
+        home: const MainWindow(),
+      ),
     );
   }
 }

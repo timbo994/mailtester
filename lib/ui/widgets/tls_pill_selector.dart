@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/smtp_config.dart';
+import '../extensions/tls_mode_ui.dart';
 
 class TlsPillSelector extends StatelessWidget {
   final TlsMode selected;

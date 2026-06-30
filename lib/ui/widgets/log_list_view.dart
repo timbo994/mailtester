@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../i18n/strings.g.dart';
 import '../../models/log_entry.dart';
 import '../app_theme.dart';
 
@@ -40,10 +41,10 @@ class _LogListViewState extends State<LogListView> {
   @override
   Widget build(BuildContext context) {
     if (widget.entries.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
-          'Noch keine Ausgabe. Starte einen Test.',
-          style: TextStyle(color: AppTheme.hintText, fontSize: 13),
+          t.debug.emptyHint,
+          style: const TextStyle(color: AppTheme.hintText, fontSize: 13),
         ),
       );
     }

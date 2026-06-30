@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../i18n/strings.g.dart';
 import '../providers/debug_log_provider.dart';
 import '../providers/oauth_provider.dart';
 import '../providers/smtp_provider.dart';
@@ -69,9 +70,9 @@ class _PanelHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(
         children: [
-          const Text(
-            'Debug-Ausgabe',
-            style: TextStyle(
+          Text(
+            t.debug.title,
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 13,
               color: AppTheme.panelHeaderText,
@@ -83,20 +84,20 @@ class _PanelHeader extends StatelessWidget {
           if (hasEntries) ...[
             _HeaderButton(
               icon: Icons.copy_outlined,
-              tooltip: 'Log kopieren',
+              tooltip: t.debug.tooltipCopy,
               onTap: () => Clipboard.setData(ClipboardData(text: logText)),
             ),
             const SizedBox(width: 4),
             _HeaderButton(
               icon: Icons.delete_outline,
-              tooltip: 'Log leeren',
+              tooltip: t.debug.tooltipClear,
               onTap: onClear,
             ),
             const SizedBox(width: 4),
           ],
           _HeaderButton(
             icon: Icons.close,
-            tooltip: 'Panel schließen',
+            tooltip: t.debug.tooltipClose,
             onTap: onClose,
           ),
         ],

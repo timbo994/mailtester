@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../i18n/strings.g.dart';
 import '../../models/connection_status.dart';
 import '../../providers/debug_log_provider.dart';
 import '../../providers/oauth_provider.dart';
@@ -86,12 +87,12 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SectionCard(
-            title: 'Azure-Konfiguration',
+            title: t.exchange.sectionAzure,
             children: [
               _Field(
-                label: 'Tenant-ID (UUID)',
+                label: t.exchange.tenantId,
                 ctrl: _tenantCtrl,
-                hint: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+                hint: t.exchange.tenantIdHint,
                 onChanged: ref.read(oauthConfigProvider.notifier).setTenantId,
               ),
               const SizedBox(height: 12),
@@ -99,10 +100,9 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
                 children: [
                   Expanded(
                     child: _Field(
-                      label: 'Client-ID',
+                      label: t.exchange.clientId,
                       ctrl: _clientIdCtrl,
-                      onChanged:
-                          ref.read(oauthConfigProvider.notifier).setClientId,
+                      onChanged: ref.read(oauthConfigProvider.notifier).setClientId,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -122,22 +122,22 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
           ),
           const SizedBox(height: 16),
           SectionCard(
-            title: 'Auto-Discovery',
+            title: t.exchange.sectionDiscovery,
             children: [
               _AutoField(
-                label: 'Token-Endpoint',
+                label: t.exchange.tokenEndpoint,
                 value: cfg.tokenEndpoint,
                 loading: !cfg.discoveryDone && cfg.tenantId.isNotEmpty,
               ),
               const SizedBox(height: 12),
               _AutoField(
-                label: 'Authorization-Endpoint',
+                label: t.exchange.authEndpoint,
                 value: cfg.authorizationEndpoint,
                 loading: !cfg.discoveryDone && cfg.tenantId.isNotEmpty,
               ),
               const SizedBox(height: 12),
               _AutoField(
-                label: 'Scope',
+                label: t.exchange.scope,
                 value: cfg.scope,
                 loading: false,
               ),
@@ -145,10 +145,10 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
           ),
           const SizedBox(height: 16),
           SectionCard(
-            title: 'Postfach',
+            title: t.exchange.sectionMailbox,
             children: [
               _Field(
-                label: 'Exchange-Mailbox (E-Mail)',
+                label: t.exchange.mailbox,
                 ctrl: _mailboxCtrl,
                 onChanged: ref.read(oauthConfigProvider.notifier).setMailbox,
               ),
@@ -162,21 +162,21 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
               OutlinedButton.icon(
                 onPressed: running ? null : _runOauthFlow,
                 icon: const Icon(Icons.key_outlined, size: 16),
-                label: const Text('OAuth-Flow testen'),
+                label: Text(t.exchange.btnTestOAuth),
               ),
               const SizedBox(width: 10),
               FilledButton.icon(
                 onPressed: (running || token == null) ? null : _runEwsCheck,
                 icon: const Icon(Icons.inbox_outlined, size: 16),
-                label: const Text('EWS-Verbindung prüfen'),
+                label: Text(t.exchange.btnTestEws),
               ),
             ],
           ),
           if (token == null && status != ConnectionStatus.idle) ...[
             const SizedBox(height: 8),
-            const Text(
-              'EWS-Test erst nach erfolgreichem OAuth-Flow verfügbar.',
-              style: TextStyle(fontSize: 11, color: AppTheme.mutedText),
+            Text(
+              t.exchange.ewsHint,
+              style: const TextStyle(fontSize: 11, color: AppTheme.mutedText),
             ),
           ],
         ],
@@ -235,7 +235,7 @@ class _SecretField extends StatelessWidget {
       style: Theme.of(context).textTheme.bodyMedium,
       onChanged: onChanged,
       decoration: InputDecoration(
-        labelText: 'Client-Secret',
+        labelText: t.exchange.clientSecret,
         isDense: true,
         suffixIcon: IconButton(
           icon: Icon(
@@ -272,7 +272,9 @@ class _AutoField extends StatelessWidget {
             labelText: label,
             isDense: true,
             contentPadding: const EdgeInsets.fromLTRB(14, 12, 70, 12),
-            hintText: loading ? 'Discovery läuft…' : 'Wird nach Tenant-ID befüllt',
+            hintText: loading
+                ? t.exchange.discoveryRunning
+                : t.exchange.discoveryPlaceholder,
             hintStyle: const TextStyle(fontSize: 12, color: AppTheme.deepHint),
           ),
         ),
@@ -289,8 +291,7 @@ class _AutoField extends StatelessWidget {
                   ),
                 )
               : Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: AppTheme.primary.withAlpha(40),
                     border: Border.all(color: AppTheme.primary.withAlpha(100)),

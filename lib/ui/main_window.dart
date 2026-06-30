@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../i18n/strings.g.dart';
 import '../providers/debug_log_provider.dart';
 import 'app_theme.dart';
 import 'debug_panel.dart';
@@ -57,7 +58,7 @@ class _AppBar extends StatelessWidget {
           const Icon(Icons.email_outlined, size: 18, color: AppTheme.primary),
           const SizedBox(width: 10),
           Text(
-            'SMTP & Exchange OAuth Tester',
+            t.appTitle,
             style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(width: 32),

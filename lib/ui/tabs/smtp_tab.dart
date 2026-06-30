@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../i18n/strings.g.dart';
 import '../../models/connection_status.dart';
-import '../app_theme.dart';
 import '../../models/smtp_config.dart';
 import '../../providers/debug_log_provider.dart';
 import '../../providers/smtp_provider.dart';
 import '../../services/smtp_service.dart';
+import '../app_theme.dart';
 import '../widgets/section_card.dart';
 import '../widgets/status_chip.dart';
 import '../widgets/tls_pill_selector.dart';
@@ -30,10 +31,8 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
   final _passCtrl = TextEditingController();
   final _fromCtrl = TextEditingController();
   final _toCtrl = TextEditingController();
-  final _subjectCtrl = TextEditingController(text: 'SMTP Verbindungstest');
-  final _bodyCtrl = TextEditingController(
-    text: 'Dies ist eine automatisch generierte Test-E-Mail.',
-  );
+  late final _subjectCtrl = TextEditingController(text: t.smtp.defaultSubject);
+  late final _bodyCtrl = TextEditingController(text: t.smtp.defaultBody);
 
   TlsMode _tlsMode = TlsMode.starttls;
   bool _obscurePass = true;
@@ -95,18 +94,18 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SectionCard(
-            title: 'Verbindung',
+            title: t.smtp.sectionConnection,
             children: [
               Row(
                 children: [
                   Expanded(
                     flex: 3,
-                    child: _Field(label: 'SMTP-Host', ctrl: _hostCtrl),
+                    child: _Field(label: t.smtp.host, ctrl: _hostCtrl),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: _Field(
-                      label: 'Port',
+                      label: t.smtp.port,
                       ctrl: _portCtrl,
                       keyboardType: TextInputType.number,
                     ),
@@ -114,7 +113,7 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
                   const SizedBox(width: 12),
                   Expanded(
                     child: _Field(
-                      label: 'Timeout (s)',
+                      label: t.smtp.timeout,
                       ctrl: _timeoutCtrl,
                       keyboardType: TextInputType.number,
                     ),
@@ -124,9 +123,9 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
               const SizedBox(height: 14),
               Row(
                 children: [
-                  const Text(
-                    'TLS-Modus',
-                    style: TextStyle(fontSize: 12, color: AppTheme.subtleText),
+                  Text(
+                    t.smtp.tlsModeLabel,
+                    style: const TextStyle(fontSize: 12, color: AppTheme.subtleText),
                   ),
                   const SizedBox(width: 16),
                   TlsPillSelector(
@@ -139,11 +138,11 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
           ),
           const SizedBox(height: 16),
           SectionCard(
-            title: 'Authentifizierung',
+            title: t.smtp.sectionAuth,
             children: [
               Row(
                 children: [
-                  Expanded(child: _Field(label: 'Benutzername', ctrl: _userCtrl)),
+                  Expanded(child: _Field(label: t.smtp.username, ctrl: _userCtrl)),
                   const SizedBox(width: 12),
                   Expanded(
                     child: _PasswordField(
@@ -158,20 +157,20 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
           ),
           const SizedBox(height: 16),
           SectionCard(
-            title: 'Test-E-Mail',
+            title: t.smtp.sectionTestMail,
             children: [
               Row(
                 children: [
-                  Expanded(child: _Field(label: 'Von', ctrl: _fromCtrl)),
+                  Expanded(child: _Field(label: t.smtp.from, ctrl: _fromCtrl)),
                   const SizedBox(width: 12),
-                  Expanded(child: _Field(label: 'An', ctrl: _toCtrl)),
+                  Expanded(child: _Field(label: t.smtp.to, ctrl: _toCtrl)),
                 ],
               ),
               const SizedBox(height: 12),
-              _Field(label: 'Betreff', ctrl: _subjectCtrl),
+              _Field(label: t.smtp.subject, ctrl: _subjectCtrl),
               const SizedBox(height: 12),
               _Field(
-                label: 'Nachrichtentext',
+                label: t.smtp.body,
                 ctrl: _bodyCtrl,
                 maxLines: 4,
               ),
@@ -185,13 +184,13 @@ class _SmtpTabState extends ConsumerState<SmtpTab>
               OutlinedButton.icon(
                 onPressed: running ? null : () => _run(sendMail: false),
                 icon: const Icon(Icons.cable_outlined, size: 16),
-                label: const Text('Verbindung testen'),
+                label: Text(t.smtp.btnTestConnection),
               ),
               const SizedBox(width: 10),
               FilledButton.icon(
                 onPressed: running ? null : () => _run(sendMail: true),
                 icon: const Icon(Icons.send_outlined, size: 16),
-                label: const Text('Test-Mail senden'),
+                label: Text(t.smtp.btnSendTestMail),
               ),
             ],
           ),
@@ -247,7 +246,7 @@ class _PasswordField extends StatelessWidget {
       obscureText: obscure,
       style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
-        labelText: 'Passwort',
+        labelText: t.smtp.password,
         isDense: true,
         suffixIcon: IconButton(
           icon: Icon(

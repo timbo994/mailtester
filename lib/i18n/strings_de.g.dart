@@ -112,8 +112,9 @@ class _Translations$exchange$de implements Translations$exchange$en {
 	@override String get tokenEndpoint => 'Token-Endpoint';
 	@override String get authEndpoint => 'Authorization-Endpoint';
 	@override String get scope => 'Scope';
-	@override String get sectionMailbox => 'Postfach';
+	@override String get sectionMailbox => 'Postfach & EWS';
 	@override String get mailbox => 'Exchange-Mailbox (E-Mail)';
+	@override String get ewsUrl => 'EWS-URL';
 	@override String get ewsHint => 'EWS-Test erst nach erfolgreichem OAuth-Flow verfügbar.';
 	@override String get discoveryRunning => 'Discovery läuft…';
 	@override String get discoveryPlaceholder => 'Wird nach Tenant-ID befüllt';
@@ -177,8 +178,9 @@ extension on TranslationsDe {
 			'exchange.tokenEndpoint' => 'Token-Endpoint',
 			'exchange.authEndpoint' => 'Authorization-Endpoint',
 			'exchange.scope' => 'Scope',
-			'exchange.sectionMailbox' => 'Postfach',
+			'exchange.sectionMailbox' => 'Postfach & EWS',
 			'exchange.mailbox' => 'Exchange-Mailbox (E-Mail)',
+			'exchange.ewsUrl' => 'EWS-URL',
 			'exchange.ewsHint' => 'EWS-Test erst nach erfolgreichem OAuth-Flow verfügbar.',
 			'exchange.discoveryRunning' => 'Discovery läuft…',
 			'exchange.discoveryPlaceholder' => 'Wird nach Tenant-ID befüllt',

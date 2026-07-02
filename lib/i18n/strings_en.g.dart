@@ -185,11 +185,14 @@ class Translations$exchange$en {
 	/// en: 'Scope'
 	String get scope => 'Scope';
 
-	/// en: 'Mailbox'
-	String get sectionMailbox => 'Mailbox';
+	/// en: 'Mailbox & EWS'
+	String get sectionMailbox => 'Mailbox & EWS';
 
 	/// en: 'Exchange Mailbox (Email)'
 	String get mailbox => 'Exchange Mailbox (Email)';
+
+	/// en: 'EWS URL'
+	String get ewsUrl => 'EWS URL';
 
 	/// en: 'EWS test only available after a successful OAuth flow.'
 	String get ewsHint => 'EWS test only available after a successful OAuth flow.';
@@ -273,8 +276,9 @@ extension on Translations {
 			'exchange.tokenEndpoint' => 'Token Endpoint',
 			'exchange.authEndpoint' => 'Authorization Endpoint',
 			'exchange.scope' => 'Scope',
-			'exchange.sectionMailbox' => 'Mailbox',
+			'exchange.sectionMailbox' => 'Mailbox & EWS',
 			'exchange.mailbox' => 'Exchange Mailbox (Email)',
+			'exchange.ewsUrl' => 'EWS URL',
 			'exchange.ewsHint' => 'EWS test only available after a successful OAuth flow.',
 			'exchange.discoveryRunning' => 'Discovery running…',
 			'exchange.discoveryPlaceholder' => 'Will be filled after Tenant ID is entered',

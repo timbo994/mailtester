@@ -26,6 +26,9 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
   final _clientIdCtrl = TextEditingController();
   final _secretCtrl = TextEditingController();
   final _mailboxCtrl = TextEditingController();
+  final _ewsUrlCtrl = TextEditingController(
+    text: 'https://outlook.office365.com/EWS/Exchange.asmx',
+  );
   bool _obscureSecret = true;
 
   @override
@@ -34,6 +37,7 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
     _clientIdCtrl.dispose();
     _secretCtrl.dispose();
     _mailboxCtrl.dispose();
+    _ewsUrlCtrl.dispose();
     super.dispose();
   }
 
@@ -66,7 +70,7 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
     final service = OAuthService(onLog: ref.read(debugLogProvider.notifier).add);
 
     try {
-      await service.testEws(token, cfg.mailbox);
+      await service.testEws(token, cfg.mailbox, cfg.ewsUrl);
       ref.read(oauthStatusProvider.notifier).set(ConnectionStatus.connected);
     } catch (_) {
       ref.read(oauthStatusProvider.notifier).set(ConnectionStatus.error);
@@ -151,6 +155,12 @@ class _ExchangeTabState extends ConsumerState<ExchangeTab>
                 label: t.exchange.mailbox,
                 ctrl: _mailboxCtrl,
                 onChanged: ref.read(oauthConfigProvider.notifier).setMailbox,
+              ),
+              const SizedBox(height: 12),
+              _Field(
+                label: t.exchange.ewsUrl,
+                ctrl: _ewsUrlCtrl,
+                onChanged: ref.read(oauthConfigProvider.notifier).setEwsUrl,
               ),
             ],
           ),

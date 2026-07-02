@@ -6,6 +6,7 @@ class OAuthConfig {
   final String authorizationEndpoint;
   final String scope;
   final String mailbox;
+  final String ewsUrl;
 
   const OAuthConfig({
     this.tenantId = '',
@@ -15,6 +16,7 @@ class OAuthConfig {
     this.authorizationEndpoint = '',
     this.scope = 'https://outlook.office365.com/.default',
     this.mailbox = '',
+    this.ewsUrl = 'https://outlook.office365.com/EWS/Exchange.asmx',
   });
 
   bool get discoveryDone =>
@@ -28,6 +30,7 @@ class OAuthConfig {
     String? authorizationEndpoint,
     String? scope,
     String? mailbox,
+    String? ewsUrl,
   }) {
     return OAuthConfig(
       tenantId: tenantId ?? this.tenantId,
@@ -38,6 +41,7 @@ class OAuthConfig {
           authorizationEndpoint ?? this.authorizationEndpoint,
       scope: scope ?? this.scope,
       mailbox: mailbox ?? this.mailbox,
+      ewsUrl: ewsUrl ?? this.ewsUrl,
     );
   }
 }

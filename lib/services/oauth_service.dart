@@ -49,8 +49,7 @@ class OAuthService {
     }
   }
 
-  Future<void> testEws(String token, String mailbox) async {
-    const ewsUrl = 'https://outlook.office365.com/EWS/Exchange.asmx';
+  Future<void> testEws(String token, String mailbox, String ewsUrl) async {
     _log(LogLevel.info, '→ EWS GetFolder POST $ewsUrl');
     _log(LogLevel.info, '  Postfach: $mailbox');
 

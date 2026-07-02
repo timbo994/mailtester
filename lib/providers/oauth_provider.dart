@@ -39,6 +39,7 @@ class OAuthConfigNotifier extends Notifier<OAuthConfig> {
   void setClientId(String v) => state = state.copyWith(clientId: v);
   void setClientSecret(String v) => state = state.copyWith(clientSecret: v);
   void setMailbox(String v) => state = state.copyWith(mailbox: v);
+  void setEwsUrl(String v) => state = state.copyWith(ewsUrl: v);
 
   Future<void> _discover(String tenantId) async {
     final addLog = ref.read(debugLogProvider.notifier).add;

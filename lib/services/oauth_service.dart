@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 import '../models/log_entry.dart';
 import '../models/oauth_config.dart';
@@ -15,44 +14,39 @@ class OAuthService {
 
   Future<String> requestToken(OAuthConfig cfg) async {
     _log(LogLevel.info, '→ POST ${cfg.tokenEndpoint}');
-    _log(LogLevel.info, '  grant_type=client_credentials');
-    _log(LogLevel.info, '  client_id=${cfg.clientId}');
-    _log(LogLevel.info, '  client_secret=****');
-    _log(LogLevel.info, '  scope=${cfg.scope}');
+    _log(LogLevel.info, '  grant_type=client_credentials  scope=${cfg.scope}');
 
-    final resp = await http.post(
-      Uri.parse(cfg.tokenEndpoint),
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: {
-        'grant_type': 'client_credentials',
-        'client_id': cfg.clientId,
-        'client_secret': cfg.clientSecret,
-        'scope': cfg.scope,
-      },
-    );
+    try {
+      final client = await oauth2.clientCredentialsGrant(
+        Uri.parse(cfg.tokenEndpoint),
+        cfg.clientId,
+        cfg.clientSecret,
+        scopes: [cfg.scope],
+      );
+      final creds = client.credentials;
+      final token = creds.accessToken;
 
-    _log(LogLevel.info, '← HTTP ${resp.statusCode}');
+      _log(LogLevel.success, '✓ Token erhalten');
+      if (creds.expiration != null) {
+        final mins = creds.expiration!.difference(DateTime.now()).inMinutes;
+        _log(LogLevel.info, '  expires_in: ~${mins}min');
+      }
+      if (creds.scopes != null) _log(LogLevel.info, '  scope: ${creds.scopes!.join(' ')}');
+      _log(LogLevel.info, '  access_token: ${token.length > 20 ? '${token.substring(0, 20)}…' : token}');
 
-    if (resp.statusCode != 200) {
-      _log(LogLevel.error, '✗ Token-Anfrage fehlgeschlagen: HTTP ${resp.statusCode}');
-      _log(LogLevel.error, resp.body.length > 500 ? '${resp.body.substring(0, 500)}…' : resp.body);
-      throw Exception('Token-Anfrage fehlgeschlagen: HTTP ${resp.statusCode}');
+      if (token.isEmpty) throw Exception('Leeres access_token in der Antwort');
+      return token;
+    } on oauth2.AuthorizationException catch (e) {
+      final desc = e.description != null ? ': ${e.description}' : '';
+      _log(LogLevel.error, '✗ OAuth-Fehler (${e.error})$desc');
+      rethrow;
+    } on http.ClientException catch (e) {
+      _log(LogLevel.error, '✗ HTTP-Fehler: ${e.message}');
+      rethrow;
+    } catch (e) {
+      _log(LogLevel.error, '✗ Fehler: $e');
+      rethrow;
     }
-
-    final json = jsonDecode(resp.body) as Map<String, dynamic>;
-    final token = json['access_token'] as String? ?? '';
-    final tokenType = json['token_type'] as String? ?? 'Bearer';
-    final expiresIn = json['expires_in'] as int? ?? 0;
-    final scope = json['scope'] as String? ?? '';
-
-    _log(LogLevel.success, '✓ Token erhalten');
-    _log(LogLevel.info, '  token_type: $tokenType');
-    _log(LogLevel.info, '  expires_in: ${expiresIn}s (${(expiresIn / 60).toStringAsFixed(0)} min)');
-    if (scope.isNotEmpty) _log(LogLevel.info, '  scope: $scope');
-    _log(LogLevel.info, '  access_token: ${token.length > 20 ? '${token.substring(0, 20)}…' : token}');
-
-    if (token.isEmpty) throw Exception('Leeres access_token in der Antwort');
-    return token;
   }
 
   Future<void> testEws(String token, String mailbox) async {

@@ -1,0 +1,10 @@
+Package: mail-tester
+Version: __VERSION__
+Section: net
+Priority: optional
+Architecture: __ARCH__
+Depends: libgtk-3-0
+Maintainer: Timo Boomgaarden <timoboomgaarden36@gmail.com>
+Description: SMTP & Exchange OAuth connection tester
+ Mail Tester is a Flutter desktop application for diagnosing email
+ connections, covering SMTP and Exchange OAuth 2.0 (Azure AD / Entra ID).

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Mail Tester
+Comment=SMTP & Exchange OAuth connection tester
+Exec=/opt/mail_tester/mail_tester
+Icon=/opt/mail_tester/icon.png
+Terminal=false
+Categories=Utility;Network;
